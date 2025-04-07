@@ -1,0 +1,6 @@
+[workspace]
+members = [
+  "cobotium/cli",
+  "cobotium/program"
+]
+resolver = "2"

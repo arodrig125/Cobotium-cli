@@ -1,0 +1,11 @@
+[package]
+name = "cobotium-program"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+solana-program = "=1.17.11"
+ahash = "=0.7.6"
