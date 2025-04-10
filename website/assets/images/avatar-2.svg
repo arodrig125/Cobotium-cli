@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="100" fill="#00cec9"/>
+  
+  <!-- Hair -->
+  <path d="M60 80 Q60 40, 100 40 Q140 40, 140 80 L140 90 L60 90 Z" fill="#2d3436"/>
+  
+  <!-- Face -->
+  <circle cx="100" cy="95" r="40" fill="#ffffff"/>
+  
+  <!-- Eyes -->
+  <ellipse cx="85" cy="90" rx="6" ry="4" fill="#2d3436"/>
+  <ellipse cx="115" cy="90" rx="6" ry="4" fill="#2d3436"/>
+  
+  <!-- Smile -->
+  <path d="M85 105 Q100 115, 115 105" stroke="#2d3436" stroke-width="3" fill="transparent"/>
+  
+  <!-- Glasses -->
+  <rect x="75" y="85" width="20" height="10" rx="5" ry="5" stroke="#2d3436" stroke-width="2" fill="transparent"/>
+  <rect x="105" y="85" width="20" height="10" rx="5" ry="5" stroke="#2d3436" stroke-width="2" fill="transparent"/>
+  <line x1="95" y1="90" x2="105" y2="90" stroke="#2d3436" stroke-width="2"/>
+  
+  <!-- Body -->
+  <path d="M70 135 L70 170 L130 170 L130 135 Q100 150, 70 135" fill="#81ecec"/>
+  
+  <!-- Collar -->
+  <path d="M85 135 L100 150 L115 135" fill="none" stroke="#2d3436" stroke-width="2"/>
+</svg>
