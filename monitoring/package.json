@@ -1,0 +1,20 @@
+{
+  "name": "cobotium-monitor",
+  "version": "1.0.0",
+  "description": "Monitoring service for Cobotium token program",
+  "main": "monitor.js",
+  "scripts": {
+    "start": "node monitor.js",
+    "start:pm2": "pm2 start monitor.js --name cobotium-monitor",
+    "stop": "pm2 stop cobotium-monitor",
+    "logs": "pm2 logs cobotium-monitor"
+  },
+  "author": "Cobotium Team",
+  "license": "MIT",
+  "dependencies": {
+    "@solana/web3.js": "^1.73.0",
+    "axios": "^1.3.0",
+    "discord.js": "^14.7.1",
+    "pm2": "^5.2.2"
+  }
+}
