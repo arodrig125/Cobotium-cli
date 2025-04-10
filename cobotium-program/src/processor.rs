@@ -30,9 +30,9 @@ impl Processor {
         let instruction = CobotiumInstruction::try_from_slice(input)?;
 
         match instruction {
-            CobotiumInstruction::InitializeMint { decimals } => {
+            CobotiumInstruction::InitializeMint { decimals, freeze_authority } => {
                 msg!("Instruction: InitializeMint");
-                Self::process_initialize_mint(accounts, decimals, program_id)
+                Self::process_initialize_mint(accounts, decimals, freeze_authority, program_id)
             }
             CobotiumInstruction::InitializeAccount => {
                 msg!("Instruction: InitializeAccount");
@@ -57,12 +57,20 @@ impl Processor {
     pub fn process_initialize_mint(
         accounts: &[AccountInfo],
         decimals: u8,
+        freeze_authority: Option<Pubkey>,
         program_id: &Pubkey,
     ) -> ProgramResult {
         let account_info_iter = &mut accounts.iter();
         let mint_info = next_account_info(account_info_iter)?;
         let rent_info = next_account_info(account_info_iter)?;
         let mint_authority_info = next_account_info(account_info_iter)?;
+
+        // Get optional freeze authority
+        let freeze_authority_info = if freeze_authority.is_some() {
+            Some(next_account_info(account_info_iter)?)
+        } else {
+            None
+        };
 
         // Check program ownership
         if mint_info.owner != program_id {
@@ -75,16 +83,48 @@ impl Processor {
             return Err(CobotiumError::NotRentExempt.into());
         }
 
+        // Check if the mint account is already initialized
+        if mint_info.data_len() >= Mint::LEN {
+            let mint = Mint::unpack_from_slice(&mint_info.data.borrow())?;
+            if mint.is_initialized {
+                return Err(CobotiumError::AlreadyInitialized.into());
+            }
+        }
+
+        // Validate decimals (typically 0-18 for tokens)
+        if decimals > 18 {
+            return Err(ProgramError::InvalidArgument);
+        }
+
+        // Verify freeze authority if provided
+        if let Some(freeze_authority) = freeze_authority {
+            if let Some(freeze_authority_info) = freeze_authority_info {
+                if freeze_authority != *freeze_authority_info.key {
+                    return Err(CobotiumError::InvalidProgramAuthority.into());
+                }
+                if !freeze_authority_info.is_signer {
+                    return Err(ProgramError::MissingRequiredSignature);
+                }
+            } else {
+                return Err(ProgramError::InvalidArgument);
+            }
+        }
+
         // Create and save mint
         let mut mint_data = mint_info.data.borrow_mut();
         let mint = Mint {
             is_initialized: true,
             decimals,
             mint_authority: *mint_authority_info.key,
+            freeze_authority,
             supply: 0,
         };
         mint.pack_into_slice(&mut mint_data);
 
+        msg!("Mint initialized with {} decimals", decimals);
+        if freeze_authority.is_some() {
+            msg!("Freeze authority set");
+        }
         Ok(())
     }
 
@@ -104,13 +144,34 @@ impl Processor {
             return Err(CobotiumError::IncorrectOwner.into());
         }
 
+        // Check mint ownership
+        if mint_info.owner != program_id {
+            return Err(CobotiumError::IncorrectOwner.into());
+        }
+
         // Check rent exemption
         let rent = &Rent::from_account_info(rent_info)?;
         if !rent.is_exempt(account_info.lamports(), account_info.data_len()) {
             return Err(CobotiumError::NotRentExempt.into());
         }
 
+        // Check if the account is already initialized
+        if account_info.data_len() >= TokenAccount::LEN {
+            let token_account = TokenAccount::unpack_from_slice(&account_info.data.borrow())?;
+            if token_account.is_initialized {
+                return Err(CobotiumError::AlreadyInitialized.into());
+            }
+        }
+
+        // Validate account size
+        if account_info.data_len() < TokenAccount::LEN {
+            return Err(ProgramError::InvalidAccountData);
+        }
+
         // Check mint is initialized
+        if mint_info.data_len() < Mint::LEN {
+            return Err(ProgramError::InvalidAccountData);
+        }
         let mint = Mint::unpack_from_slice(&mint_info.data.borrow())?;
         if !mint.is_initialized {
             return Err(CobotiumError::UninitializedAccount.into());
@@ -123,9 +184,11 @@ impl Processor {
             mint: *mint_info.key,
             owner: *owner_info.key,
             amount: 0,
+            is_frozen: false,
         };
         token_account.pack_into_slice(&mut account_data);
 
+        msg!("Token account initialized for mint: {}", mint_info.key);
         Ok(())
     }
 
@@ -140,9 +203,19 @@ impl Processor {
         let account_info = next_account_info(account_info_iter)?;
         let mint_authority_info = next_account_info(account_info_iter)?;
 
+        // Validate amount
+        if amount == 0 {
+            return Err(ProgramError::InvalidArgument);
+        }
+
         // Check program ownership
         if mint_info.owner != program_id || account_info.owner != program_id {
             return Err(CobotiumError::IncorrectOwner.into());
+        }
+
+        // Validate account sizes
+        if mint_info.data_len() < Mint::LEN || account_info.data_len() < TokenAccount::LEN {
+            return Err(ProgramError::InvalidAccountData);
         }
 
         // Check mint authority is signer
@@ -168,14 +241,22 @@ impl Processor {
             return Err(CobotiumError::InvalidTokenAccount.into());
         }
 
-        // Mint tokens
-        token_account.amount = token_account.amount.checked_add(amount).ok_or(ProgramError::InvalidArgument)?;
-        mint.supply = mint.supply.checked_add(amount).ok_or(ProgramError::InvalidArgument)?;
+        // Check if account is frozen
+        if token_account.is_frozen {
+            return Err(CobotiumError::AccountFrozen.into());
+        }
+
+        // Mint tokens with overflow check
+        token_account.amount = token_account.amount.checked_add(amount)
+            .ok_or(CobotiumError::Overflow)?;
+        mint.supply = mint.supply.checked_add(amount)
+            .ok_or(CobotiumError::Overflow)?;
 
         // Save updated accounts
         mint.pack_into_slice(&mut mint_info.data.borrow_mut());
         token_account.pack_into_slice(&mut account_info.data.borrow_mut());
 
+        msg!("Minted {} tokens to account {}", amount, account_info.key);
         Ok(())
     }
 
@@ -216,6 +297,11 @@ impl Processor {
         // Check accounts are for the same mint
         if source.mint != destination.mint {
             return Err(CobotiumError::InvalidTokenAccount.into());
+        }
+
+        // Check if accounts are frozen
+        if source.is_frozen || destination.is_frozen {
+            return Err(CobotiumError::AccountFrozen.into());
         }
 
         // Check sufficient funds
@@ -271,6 +357,11 @@ impl Processor {
         // Check account's mint matches
         if token_account.mint != *mint_info.key {
             return Err(CobotiumError::InvalidTokenAccount.into());
+        }
+
+        // Check if account is frozen
+        if token_account.is_frozen {
+            return Err(CobotiumError::AccountFrozen.into());
         }
 
         // Check sufficient funds

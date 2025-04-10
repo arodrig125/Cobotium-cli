@@ -58,12 +58,14 @@ impl CobotiumClient {
         payer: &Keypair,
         mint: &Keypair,
         mint_authority: &Pubkey,
+        freeze_authority: Option<&Pubkey>,
         decimals: u8,
     ) -> CobotiumResult<Signature> {
         let instruction = program_instruction::initialize_mint(
             &self.program_id,
             &mint.pubkey(),
             mint_authority,
+            freeze_authority,
             decimals,
         )?;
 
@@ -146,6 +148,42 @@ impl CobotiumClient {
         )?;
 
         self.send_transaction(&[instruction], &[payer, owner])
+    }
+
+    /// Freeze an account
+    pub fn freeze_account(
+        &self,
+        payer: &Keypair,
+        account: &Pubkey,
+        mint: &Pubkey,
+        freeze_authority: &Keypair,
+    ) -> CobotiumResult<Signature> {
+        let instruction = program_instruction::freeze_account(
+            &self.program_id,
+            account,
+            mint,
+            &freeze_authority.pubkey(),
+        )?;
+
+        self.send_transaction(&[instruction], &[payer, freeze_authority])
+    }
+
+    /// Thaw (unfreeze) an account
+    pub fn thaw_account(
+        &self,
+        payer: &Keypair,
+        account: &Pubkey,
+        mint: &Pubkey,
+        freeze_authority: &Keypair,
+    ) -> CobotiumResult<Signature> {
+        let instruction = program_instruction::thaw_account(
+            &self.program_id,
+            account,
+            mint,
+            &freeze_authority.pubkey(),
+        )?;
+
+        self.send_transaction(&[instruction], &[payer, freeze_authority])
     }
 
     /// Send a transaction with the given instructions and signers

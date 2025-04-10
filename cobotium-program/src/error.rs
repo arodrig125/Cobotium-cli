@@ -38,6 +38,22 @@ pub enum CobotiumError {
     /// Invalid token account
     #[error("Invalid token account")]
     InvalidTokenAccount,
+
+    /// Numerical overflow
+    #[error("Numerical overflow")]
+    Overflow,
+
+    /// Operation requires freeze authority
+    #[error("Operation requires freeze authority")]
+    MissingFreezeAuthority,
+
+    /// Account is frozen
+    #[error("Account is frozen")]
+    AccountFrozen,
+
+    /// Invalid program authority
+    #[error("Invalid program authority")]
+    InvalidProgramAuthority,
 }
 
 impl From<CobotiumError> for ProgramError {

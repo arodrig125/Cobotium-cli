@@ -16,6 +16,8 @@ pub struct Mint {
     pub decimals: u8,
     /// Authority that can mint new tokens
     pub mint_authority: Pubkey,
+    /// Authority that can freeze token accounts
+    pub freeze_authority: Option<Pubkey>,
     /// Total supply of tokens
     pub supply: u64,
 }
@@ -29,7 +31,7 @@ impl IsInitialized for Mint {
 }
 
 impl Pack for Mint {
-    const LEN: usize = 1 + 1 + 32 + 8; // is_initialized + decimals + mint_authority + supply
+    const LEN: usize = 1 + 1 + 32 + 1 + 32 + 8; // is_initialized + decimals + mint_authority + freeze_authority option + freeze_authority + supply
 
     fn pack_into_slice(&self, dst: &mut [u8]) {
         let data = self.try_to_vec().unwrap();
@@ -53,6 +55,8 @@ pub struct TokenAccount {
     pub owner: Pubkey,
     /// The amount of tokens this account holds
     pub amount: u64,
+    /// Whether this account is frozen
+    pub is_frozen: bool,
 }
 
 impl Sealed for TokenAccount {}
@@ -64,7 +68,7 @@ impl IsInitialized for TokenAccount {
 }
 
 impl Pack for TokenAccount {
-    const LEN: usize = 1 + 32 + 32 + 8; // is_initialized + mint + owner + amount
+    const LEN: usize = 1 + 32 + 32 + 8 + 1; // is_initialized + mint + owner + amount + is_frozen
 
     fn pack_into_slice(&self, dst: &mut [u8]) {
         let data = self.try_to_vec().unwrap();

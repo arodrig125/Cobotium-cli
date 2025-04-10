@@ -17,9 +17,12 @@ pub enum CobotiumInstruction {
     /// 0. `[writable]` The mint account to initialize
     /// 1. `[]` Rent sysvar
     /// 2. `[signer]` The mint authority
+    /// 3. `[signer, optional]` The freeze authority (if present)
     InitializeMint {
         /// The decimals of the mint
         decimals: u8,
+        /// Optional freeze authority
+        freeze_authority: Option<Pubkey>,
     },
 
     /// Initialize a new token account
@@ -63,6 +66,22 @@ pub enum CobotiumInstruction {
         /// The amount of tokens to burn
         amount: u64,
     },
+
+    /// Freeze an account
+    ///
+    /// Accounts expected:
+    /// 0. `[writable]` The account to freeze
+    /// 1. `[]` The mint
+    /// 2. `[signer]` The mint's freeze authority
+    FreezeAccount,
+
+    /// Thaw (unfreeze) an account
+    ///
+    /// Accounts expected:
+    /// 0. `[writable]` The account to thaw
+    /// 1. `[]` The mint
+    /// 2. `[signer]` The mint's freeze authority
+    ThawAccount,
 }
 
 /// Create an `InitializeMint` instruction
@@ -70,15 +89,25 @@ pub fn initialize_mint(
     program_id: &Pubkey,
     mint_pubkey: &Pubkey,
     mint_authority_pubkey: &Pubkey,
+    freeze_authority_pubkey: Option<&Pubkey>,
     decimals: u8,
 ) -> Result<Instruction, ProgramError> {
-    let accounts = vec![
+    let mut accounts = vec![
         AccountMeta::new(*mint_pubkey, false),
         AccountMeta::new_readonly(solana_program::sysvar::rent::id(), false),
         AccountMeta::new_readonly(*mint_authority_pubkey, true),
     ];
 
-    let data = CobotiumInstruction::InitializeMint { decimals }.try_to_vec()?;
+    // Add freeze authority if provided
+    let freeze_authority = freeze_authority_pubkey.map(|pubkey| *pubkey);
+    if let Some(freeze_authority_pubkey) = freeze_authority_pubkey {
+        accounts.push(AccountMeta::new_readonly(*freeze_authority_pubkey, true));
+    }
+
+    let data = CobotiumInstruction::InitializeMint {
+        decimals,
+        freeze_authority,
+    }.try_to_vec()?;
 
     Ok(Instruction {
         program_id: *program_id,
@@ -171,6 +200,50 @@ pub fn burn(
     ];
 
     let data = CobotiumInstruction::Burn { amount }.try_to_vec()?;
+
+    Ok(Instruction {
+        program_id: *program_id,
+        accounts,
+        data,
+    })
+}
+
+/// Create a `FreezeAccount` instruction
+pub fn freeze_account(
+    program_id: &Pubkey,
+    account_pubkey: &Pubkey,
+    mint_pubkey: &Pubkey,
+    freeze_authority_pubkey: &Pubkey,
+) -> Result<Instruction, ProgramError> {
+    let accounts = vec![
+        AccountMeta::new(*account_pubkey, false),
+        AccountMeta::new_readonly(*mint_pubkey, false),
+        AccountMeta::new_readonly(*freeze_authority_pubkey, true),
+    ];
+
+    let data = CobotiumInstruction::FreezeAccount.try_to_vec()?;
+
+    Ok(Instruction {
+        program_id: *program_id,
+        accounts,
+        data,
+    })
+}
+
+/// Create a `ThawAccount` instruction
+pub fn thaw_account(
+    program_id: &Pubkey,
+    account_pubkey: &Pubkey,
+    mint_pubkey: &Pubkey,
+    freeze_authority_pubkey: &Pubkey,
+) -> Result<Instruction, ProgramError> {
+    let accounts = vec![
+        AccountMeta::new(*account_pubkey, false),
+        AccountMeta::new_readonly(*mint_pubkey, false),
+        AccountMeta::new_readonly(*freeze_authority_pubkey, true),
+    ];
+
+    let data = CobotiumInstruction::ThawAccount.try_to_vec()?;
 
     Ok(Instruction {
         program_id: *program_id,

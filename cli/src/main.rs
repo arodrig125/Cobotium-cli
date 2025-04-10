@@ -64,6 +64,10 @@ enum Commands {
         /// Decimals for the mint
         #[clap(long, default_value = "9")]
         decimals: u8,
+
+        /// Path to the freeze authority keypair file (optional)
+        #[clap(long)]
+        freeze_authority: Option<String>,
     },
 
     /// Create a new token account
@@ -138,6 +142,36 @@ enum Commands {
         amount: u64,
     },
 
+    /// Freeze a token account
+    FreezeAccount {
+        /// Account public key
+        #[clap(long)]
+        account: String,
+
+        /// Mint public key
+        #[clap(long)]
+        mint: String,
+
+        /// Path to the freeze authority keypair file
+        #[clap(long)]
+        freeze_authority: String,
+    },
+
+    /// Thaw (unfreeze) a token account
+    ThawAccount {
+        /// Account public key
+        #[clap(long)]
+        account: String,
+
+        /// Mint public key
+        #[clap(long)]
+        mint: String,
+
+        /// Path to the freeze authority keypair file
+        #[clap(long)]
+        freeze_authority: String,
+    },
+
     /// Deploy the Cobotium program
     DeployProgram {
         /// Path to the program keypair file
@@ -167,9 +201,15 @@ fn main() -> Result<()> {
             check_balance(&rpc, &address)?;
         }
 
-        Commands::CreateMint { mint_keypair, decimals } => {
+        Commands::CreateMint { mint_keypair, decimals, freeze_authority } => {
             let mint = load_keypair(&mint_keypair)?;
-            create_mint(&cobotium_client, &payer, &mint, decimals)?;
+            let freeze_authority_pubkey = if let Some(freeze_auth) = freeze_authority {
+                let freeze_auth_keypair = load_keypair(&freeze_auth)?;
+                Some(freeze_auth_keypair.pubkey())
+            } else {
+                None
+            };
+            create_mint(&cobotium_client, &payer, &mint, freeze_authority_pubkey.as_ref(), decimals)?;
         }
 
         Commands::CreateAccount { account_keypair, mint, owner } => {
@@ -206,6 +246,24 @@ fn main() -> Result<()> {
                 .map_err(|_| anyhow!("Invalid mint public key: {}", mint))?;
             let owner_keypair = load_keypair(&owner)?;
             burn_tokens(&cobotium_client, &payer, &account_pubkey, &mint_pubkey, &owner_keypair, amount)?;
+        }
+
+        Commands::FreezeAccount { account, mint, freeze_authority } => {
+            let account_pubkey = Pubkey::from_str(&account)
+                .map_err(|_| anyhow!("Invalid account public key: {}", account))?;
+            let mint_pubkey = Pubkey::from_str(&mint)
+                .map_err(|_| anyhow!("Invalid mint public key: {}", mint))?;
+            let freeze_authority_keypair = load_keypair(&freeze_authority)?;
+            freeze_account(&cobotium_client, &payer, &account_pubkey, &mint_pubkey, &freeze_authority_keypair)?;
+        }
+
+        Commands::ThawAccount { account, mint, freeze_authority } => {
+            let account_pubkey = Pubkey::from_str(&account)
+                .map_err(|_| anyhow!("Invalid account public key: {}", account))?;
+            let mint_pubkey = Pubkey::from_str(&mint)
+                .map_err(|_| anyhow!("Invalid mint public key: {}", mint))?;
+            let freeze_authority_keypair = load_keypair(&freeze_authority)?;
+            thaw_account(&cobotium_client, &payer, &account_pubkey, &mint_pubkey, &freeze_authority_keypair)?;
         }
 
         Commands::DeployProgram { program_keypair } => {
@@ -283,12 +341,16 @@ fn create_mint(
     client: &CobotiumClient,
     payer: &Keypair,
     mint: &Keypair,
+    freeze_authority: Option<&Pubkey>,
     decimals: u8,
 ) -> Result<()> {
-    let signature = client.initialize_mint(payer, mint, &payer.pubkey(), decimals)
+    let signature = client.initialize_mint(payer, mint, &payer.pubkey(), freeze_authority, decimals)
         .map_err(|e| anyhow!("Failed to create mint: {}", e))?;
 
     println!("✅ Created mint {}\nDecimals: {}\nSignature: {}", mint.pubkey(), decimals, signature);
+    if freeze_authority.is_some() {
+        println!("Freeze authority: {}", freeze_authority.unwrap());
+    }
     Ok(())
 }
 
@@ -348,6 +410,36 @@ fn burn_tokens(
         .map_err(|e| anyhow!("Failed to burn tokens: {}", e))?;
 
     println!("✅ Burned {} tokens from {}\nMint: {}\nSignature: {}", amount, account, mint, signature);
+    Ok(())
+}
+
+fn freeze_account(
+    client: &CobotiumClient,
+    payer: &Keypair,
+    account: &Pubkey,
+    mint: &Pubkey,
+    freeze_authority: &Keypair,
+) -> Result<()> {
+    let signature = client.freeze_account(payer, account, mint, freeze_authority)
+        .map_err(|e| anyhow!("Failed to freeze account: {}", e))?;
+
+    println!("✅ Froze account {}\nMint: {}\nFreeze Authority: {}\nSignature: {}",
+        account, mint, freeze_authority.pubkey(), signature);
+    Ok(())
+}
+
+fn thaw_account(
+    client: &CobotiumClient,
+    payer: &Keypair,
+    account: &Pubkey,
+    mint: &Pubkey,
+    freeze_authority: &Keypair,
+) -> Result<()> {
+    let signature = client.thaw_account(payer, account, mint, freeze_authority)
+        .map_err(|e| anyhow!("Failed to thaw account: {}", e))?;
+
+    println!("✅ Thawed account {}\nMint: {}\nFreeze Authority: {}\nSignature: {}",
+        account, mint, freeze_authority.pubkey(), signature);
     Ok(())
 }
 
