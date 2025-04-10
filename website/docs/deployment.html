@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mainnet Deployment Guide - Cobotium Documentation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="logo.png" alt="Cobotium Logo" height="30" class="d-inline-block align-top">
+                Cobotium
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://cobotium.io">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Documentation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/arodrig125/Cobotium-cli">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-lg-2 sidebar">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Back to Main Docs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#pre-deployment">Pre-Deployment Checklist</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#deployment-process">Deployment Process</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#verification">Post-Deployment Verification</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#website">Website Integration</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#maintenance">Ongoing Maintenance</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1>Cobotium Mainnet Deployment Guide</h1>
+                </div>
+
+                <p>
+                    This guide provides detailed instructions for deploying your Cobotium token program to the Solana mainnet.
+                </p>
+
+                <section id="pre-deployment">
+                    <h2>Pre-Deployment Checklist</h2>
+                    <p>Before deploying to mainnet, ensure you have completed the following:</p>
+
+                    <h3>Security Audit</h3>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Code review completed
+                            <span class="badge bg-success rounded-pill">✓</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Security vulnerabilities addressed
+                            <span class="badge bg-success rounded-pill">✓</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Overflow protection implemented
+                            <span class="badge bg-success rounded-pill">✓</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Freeze functionality tested
+                            <span class="badge bg-success rounded-pill">✓</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            External audit completed (recommended)
+                            <span class="badge bg-warning rounded-pill">!</span>
+                        </li>
+                    </ul>
+
+                    <h3>Testing</h3>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            All functionality tested on devnet
+                            <span class="badge bg-warning rounded-pill">!</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Edge cases tested
+                            <span class="badge bg-warning rounded-pill">!</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Performance testing completed
+                            <span class="badge bg-warning rounded-pill">!</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Stress testing completed
+                            <span class="badge bg-warning rounded-pill">!</span>
+                        </li>
+                    </ul>
+
+                    <h3>Documentation</h3>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            User documentation completed
+                            <span class="badge bg-success rounded-pill">✓</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Developer documentation completed
+                            <span class="badge bg-success rounded-pill">✓</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Monitoring documentation completed
+                            <span class="badge bg-success rounded-pill">✓</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Website documentation updated
+                            <span class="badge bg-warning rounded-pill">!</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="deployment-process">
+                    <h2>Deployment Process</h2>
+                    
+                    <h3>Step 1: Final Build</h3>
+                    <p>Build the program for deployment:</p>
+                    <pre><code class="language-bash">cd cobotium-program
+cargo build-bpf --release</code></pre>
+                    <p>This will create the program binary at <code>target/deploy/cobotium_program.so</code>.</p>
+
+                    <h3>Step 2: Program Keypair</h3>
+                    <p>Generate a keypair for your program (if not already done):</p>
+                    <pre><code class="language-bash">solana-keygen new -o cobotium-program-keypair.json</code></pre>
+                    <div class="alert alert-warning">
+                        <strong>IMPORTANT</strong>: Back up this keypair securely. It is required for any future program upgrades.
+                    </div>
+                    <p>Recommended backup methods:</p>
+                    <ul>
+                        <li>Hardware security module</li>
+                        <li>Multiple encrypted backups in separate physical locations</li>
+                        <li>Paper backup in a secure location</li>
+                    </ul>
+
+                    <h3>Step 3: Fund the Deployer Account</h3>
+                    <p>Ensure your deployer account has sufficient SOL for deployment:</p>
+                    <pre><code class="language-bash">solana balance --keypair &lt;PATH_TO_DEPLOYER_KEYPAIR&gt;</code></pre>
+                    <p>If needed, transfer SOL to the deployer account:</p>
+                    <pre><code class="language-bash">solana transfer --keypair &lt;FUNDING_KEYPAIR&gt; &lt;DEPLOYER_ADDRESS&gt; &lt;AMOUNT_SOL&gt; --allow-unfunded-recipient</code></pre>
+
+                    <h3>Step 4: Deploy to Mainnet</h3>
+                    <p>Switch to the mainnet endpoint:</p>
+                    <pre><code class="language-bash">solana config set --url https://api.mainnet-beta.solana.com</code></pre>
+                    <p>Deploy the program:</p>
+                    <pre><code class="language-bash">solana program deploy --keypair &lt;PATH_TO_DEPLOYER_KEYPAIR&gt; --program-id cobotium-program-keypair.json target/deploy/cobotium_program.so</code></pre>
+                    <p>This command will output the program ID. Save this ID as it will be needed for all interactions with your program.</p>
+                </section>
+
+                <section id="verification">
+                    <h2>Post-Deployment Verification</h2>
+                    
+                    <h3>Verify Deployment</h3>
+                    <p>Verify that the program was deployed successfully:</p>
+                    <pre><code class="language-bash">solana program show &lt;PROGRAM_ID&gt;</code></pre>
+                    <p>This should display information about your deployed program, including:</p>
+                    <ul>
+                        <li>Program ID</li>
+                        <li>Owner</li>
+                        <li>Program data account</li>
+                        <li>Last deployed slot</li>
+                    </ul>
+
+                    <h3>Functional Testing</h3>
+                    <p>Perform basic functional tests to ensure the program is working correctly:</p>
+                    <ol>
+                        <li>
+                            <p>Create a mint:</p>
+                            <pre><code class="language-bash">./target/release/cobotium-cli --rpc-url https://api.mainnet-beta.solana.com --program-id &lt;PROGRAM_ID&gt; create-mint --mint-keypair &lt;KEYPAIR_PATH&gt; --decimals 9</code></pre>
+                        </li>
+                        <li>
+                            <p>Create a token account:</p>
+                            <pre><code class="language-bash">./target/release/cobotium-cli --rpc-url https://api.mainnet-beta.solana.com --program-id &lt;PROGRAM_ID&gt; create-account --account-keypair &lt;KEYPAIR_PATH&gt; --mint &lt;MINT_ADDRESS&gt; --owner &lt;OWNER_ADDRESS&gt;</code></pre>
+                        </li>
+                        <li>
+                            <p>Mint tokens:</p>
+                            <pre><code class="language-bash">./target/release/cobotium-cli --rpc-url https://api.mainnet-beta.solana.com --program-id &lt;PROGRAM_ID&gt; mint-tokens --mint &lt;MINT_ADDRESS&gt; --account &lt;ACCOUNT_ADDRESS&gt; --mint-authority &lt;AUTHORITY_KEYPAIR&gt; --amount &lt;AMOUNT&gt;</code></pre>
+                        </li>
+                    </ol>
+                </section>
+
+                <section id="website">
+                    <h2>Website Integration</h2>
+                    <p>Update your website at <a href="https://cobotium.io">cobotium.io</a> with the following information:</p>
+
+                    <h3>Program Information</h3>
+                    <ul>
+                        <li>Program ID</li>
+                        <li>Deployment date</li>
+                        <li>Current version</li>
+                    </ul>
+
+                    <h3>Explorer Links</h3>
+                    <p>Add links to Solana explorers for your program:</p>
+                    <ul>
+                        <li><a href="https://explorer.solana.com/address/YOUR_PROGRAM_ID">Solana Explorer</a></li>
+                        <li><a href="https://solscan.io/account/YOUR_PROGRAM_ID">Solscan</a></li>
+                        <li><a href="https://solanabeach.io/address/YOUR_PROGRAM_ID">Solana Beach</a></li>
+                    </ul>
+                </section>
+
+                <section id="maintenance">
+                    <h2>Ongoing Maintenance</h2>
+                    
+                    <h3>Monitoring</h3>
+                    <p>Start your monitoring system:</p>
+                    <pre><code class="language-bash">cd monitoring
+pm2 start monitor.js</code></pre>
+                    <p>Refer to the <a href="monitoring.html">Monitoring Guide</a> for detailed instructions.</p>
+
+                    <h3>Regular Health Checks</h3>
+                    <p>Schedule regular health checks:</p>
+                    <ol>
+                        <li>
+                            <p><strong>Daily:</strong></p>
+                            <ul>
+                                <li>Check program logs for errors</li>
+                                <li>Verify transaction volume is within expected range</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p><strong>Weekly:</strong></p>
+                            <ul>
+                                <li>Perform basic functionality tests</li>
+                                <li>Review account growth</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p><strong>Monthly:</strong></p>
+                            <ul>
+                                <li>Comprehensive security review</li>
+                                <li>Performance optimization review</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </section>
+
+                <footer class="pt-5 my-5 text-muted border-top">
+                    &copy; 2023 Cobotium · <a href="https://cobotium.io">cobotium.io</a>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+</body>
+</html>
