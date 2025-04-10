@@ -5,10 +5,17 @@
     { "src": "**/*", "use": "@vercel/static" }
   ],
   "routes": [
+    { "src": "^https://www.cobotium.io/(.*)", "status": 301, "headers": { "Location": "https://cobotium.io/$1" } },
+    { "src": "/documentation", "status": 301, "headers": { "Location": "/docs" } },
+    { "src": "/guide", "status": 301, "headers": { "Location": "/docs" } },
+    { "src": "/doc", "status": 301, "headers": { "Location": "/docs" } },
+    { "src": "/documentation/(.*)", "status": 301, "headers": { "Location": "/docs/$1" } },
+    { "src": "/(.*)/", "status": 301, "headers": { "Location": "/$1" } },
     { "src": "/", "dest": "/index.html" },
     { "src": "/docs", "dest": "/docs/index.html" },
     { "src": "/docs/(.*)", "dest": "/docs/$1" },
     { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/404", "status": 404, "dest": "/404.html" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }
