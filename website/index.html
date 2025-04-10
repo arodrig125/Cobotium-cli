@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cobotium - Solana Token Platform</title>
+    <meta name="description" content="Cobotium is a secure, efficient token platform built on the Solana blockchain.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Cobotium - Solana Token Platform">
+    <meta property="og:description" content="Secure, efficient token platform built on the Solana blockchain.">
+    <meta property="og:image" content="https://cobotium.io/assets/images/og-image.jpg">
+    <meta property="og:url" content="https://cobotium.io">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="assets/images/cobotium-logo.svg" alt="Cobotium Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#developers">Developers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#roadmap">Roadmap</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="docs/">Documentation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary ms-lg-3" href="https://github.com/arodrig125/Cobotium-cli" target="_blank">GitHub <i class="bi bi-github"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="display-4 fw-bold mb-4">The Next Generation Token Platform on Solana</h1>
+                    <p class="lead mb-4">Cobotium provides a secure, efficient, and feature-rich token platform for creating and managing tokens on the Solana blockchain.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="docs/" class="btn btn-primary btn-lg">Get Started</a>
+                        <a href="#features" class="btn btn-outline-light btn-lg">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="hero-image">
+                        <img src="assets/images/hero-illustration.svg" alt="Cobotium Platform Illustration" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg-gradient"></div>
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Key Features</h2>
+                <p class="section-subtitle">Powerful capabilities for your token ecosystem</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3>Enhanced Security</h3>
+                        <p>Built-in overflow protection, ownership verification, and freeze functionality for emergency situations.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-lightning-charge"></i>
+                        </div>
+                        <h3>High Performance</h3>
+                        <p>Leverages Solana's high throughput and low fees for efficient token operations at scale.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-gear"></i>
+                        </div>
+                        <h3>Flexible Configuration</h3>
+                        <p>Configurable token decimals, optional freeze authority, and customizable token attributes.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-code-square"></i>
+                        </div>
+                        <h3>Developer Friendly</h3>
+                        <p>Comprehensive SDK and CLI tools for easy integration and management of tokens.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h3>Advanced Monitoring</h3>
+                        <p>Built-in monitoring tools for tracking token activity, detecting issues, and ensuring reliability.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <h3>Detailed Documentation</h3>
+                        <p>Extensive documentation for users, developers, and administrators to get the most out of Cobotium.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Simple, powerful token management</p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2" data-aos="fade-left">
+                    <img src="assets/images/how-it-works.svg" alt="How Cobotium Works" class="img-fluid rounded shadow-lg">
+                </div>
+                <div class="col-lg-6 order-lg-1" data-aos="fade-right">
+                    <div class="steps-container">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Create a Token Mint</h3>
+                                <p>Initialize a new token mint with configurable decimals and optional freeze authority.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Create Token Accounts</h3>
+                                <p>Create accounts to hold tokens for different users or purposes.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Mint and Transfer Tokens</h3>
+                                <p>Mint new tokens to accounts and transfer them between users securely.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Monitor and Manage</h3>
+                                <p>Use our tools to monitor token activity and manage your token ecosystem.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developers Section -->
+    <section id="developers" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">For Developers</h2>
+                <p class="section-subtitle">Powerful tools to build on Cobotium</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="dev-card">
+                        <h3><i class="bi bi-code-slash"></i> SDK</h3>
+                        <p>Our SDK provides a convenient way to interact with the Cobotium Token Program from Rust applications.</p>
+                        <div class="code-block">
+                            <pre><code class="language-rust">// Create a client
+let client = CobotiumClient::new(
+    "https://api.mainnet-beta.solana.com", 
+    "YOUR_PROGRAM_ID"
+)?;
+
+// Initialize a mint
+client.initialize_mint(
+    &payer, 
+    &mint, 
+    &payer.pubkey(), 
+    freeze_authority, 
+    decimals
+)?;</code></pre>
+                        </div>
+                        <a href="docs/#sdk" class="btn btn-outline-primary mt-3">SDK Documentation</a>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="dev-card">
+                        <h3><i class="bi bi-terminal"></i> CLI</h3>
+                        <p>The Cobotium CLI provides a command-line interface for interacting with the Cobotium Token Program.</p>
+                        <div class="code-block">
+                            <pre><code class="language-bash"># Create a mint
+cobotium-cli --program-id &lt;PROGRAM_ID&gt; \
+  create-mint --mint-keypair &lt;KEYPAIR_PATH&gt; \
+  --decimals 9
+
+# Mint tokens
+cobotium-cli --program-id &lt;PROGRAM_ID&gt; \
+  mint-tokens --mint &lt;MINT_ADDRESS&gt; \
+  --account &lt;ACCOUNT_ADDRESS&gt; \
+  --amount 1000000000</code></pre>
+                        </div>
+                        <a href="docs/#cli" class="btn btn-outline-primary mt-3">CLI Documentation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Roadmap</h2>
+                <p class="section-subtitle">Our vision for the future of Cobotium</p>
+            </div>
+            <div class="roadmap" data-aos="fade-up">
+                <div class="roadmap-item completed">
+                    <div class="roadmap-content">
+                        <h3>Q2 2023</h3>
+                        <h4>Initial Development</h4>
+                        <ul>
+                            <li>Core token program development</li>
+                            <li>Basic SDK and CLI implementation</li>
+                            <li>Security enhancements</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="roadmap-item active">
+                    <div class="roadmap-content">
+                        <h3>Q3 2023</h3>
+                        <h4>Mainnet Launch</h4>
+                        <ul>
+                            <li>Comprehensive documentation</li>
+                            <li>Monitoring system implementation</li>
+                            <li>Mainnet deployment</li>
+                            <li>Website launch</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <h3>Q4 2023</h3>
+                        <h4>Ecosystem Expansion</h4>
+                        <ul>
+                            <li>JavaScript/TypeScript SDK</li>
+                            <li>Token explorer integration</li>
+                            <li>Community building</li>
+                            <li>Partnership development</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <h3>Q1 2024</h3>
+                        <h4>Advanced Features</h4>
+                        <ul>
+                            <li>Multi-signature support</li>
+                            <li>Token vesting capabilities</li>
+                            <li>Enhanced analytics dashboard</li>
+                            <li>Mobile app development</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container py-5 text-center">
+            <div data-aos="fade-up">
+                <h2 class="display-5 fw-bold mb-4">Ready to Build on Cobotium?</h2>
+                <p class="lead mb-4">Start creating and managing tokens on the Solana blockchain today.</p>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="docs/" class="btn btn-primary btn-lg">Get Started</a>
+                    <a href="https://github.com/arodrig125/Cobotium-cli" class="btn btn-outline-light btn-lg" target="_blank">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+        <div class="cta-bg-gradient"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <a href="/" class="d-inline-block mb-3">
+                        <img src="assets/images/cobotium-logo.svg" alt="Cobotium Logo" height="40">
+                    </a>
+                    <p class="mb-3">A secure, efficient token platform built on the Solana blockchain.</p>
+                    <div class="social-links">
+                        <a href="https://github.com/arodrig125/Cobotium-cli" target="_blank" class="social-link"><i class="bi bi-github"></i></a>
+                        <a href="https://twitter.com/" target="_blank" class="social-link"><i class="bi bi-twitter"></i></a>
+                        <a href="https://discord.gg/" target="_blank" class="social-link"><i class="bi bi-discord"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5>Product</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#developers">For Developers</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="docs/">Documentation</a></li>
+                        <li><a href="docs/deployment.html">Deployment Guide</a></li>
+                        <li><a href="docs/monitoring.html">Monitoring</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5>Community</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://github.com/arodrig125/Cobotium-cli" target="_blank">GitHub</a></li>
+                        <li><a href="https://discord.gg/" target="_blank">Discord</a></li>
+                        <li><a href="https://twitter.com/" target="_blank">Twitter</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-md-0">&copy; 2023 Cobotium. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Built on <a href="https://solana.com" target="_blank" class="footer-link">Solana</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" aria-label="Back to top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-rust.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

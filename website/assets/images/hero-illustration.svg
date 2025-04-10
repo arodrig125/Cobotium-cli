@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Grid -->
+  <path d="M0 0 L600 0 L600 400 L0 400 Z" fill="#2D3436" fill-opacity="0.05"/>
+  <path d="M50 0 L50 400" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M100 0 L100 400" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M150 0 L150 400" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M200 0 L200 400" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M250 0 L250 400" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M300 0 L300 400" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M350 0 L350 400" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M400 0 L400 400" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M450 0 L450 400" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M500 0 L500 400" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M550 0 L550 400" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  
+  <path d="M0 50 L600 50" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M0 100 L600 100" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M0 150 L600 150" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M0 200 L600 200" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M0 250 L600 250" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M0 300 L600 300" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  <path d="M0 350 L600 350" stroke="#6C5CE7" stroke-opacity="0.1" stroke-width="1"/>
+  
+  <!-- Main Token Circle -->
+  <circle cx="300" cy="200" r="120" fill="url(#token-gradient)" filter="url(#glow)"/>
+  
+  <!-- Token Details -->
+  <circle cx="300" cy="200" r="100" fill="#2D3436" fill-opacity="0.2" stroke="#FFFFFF" stroke-width="2"/>
+  <circle cx="300" cy="200" r="80" fill="#2D3436" fill-opacity="0.3" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="300" cy="200" r="60" fill="#2D3436" fill-opacity="0.4" stroke="#FFFFFF" stroke-width="1"/>
+  
+  <!-- Token Symbol -->
+  <path d="M280 170 L320 170 L320 230 L280 230 Z" fill="#FFFFFF" fill-opacity="0.9"/>
+  <path d="M290 180 L310 180 L310 220 L290 220 Z" fill="#6C5CE7"/>
+  
+  <!-- Orbiting Tokens -->
+  <g transform="rotate(30 300 200)">
+    <circle cx="450" cy="200" r="30" fill="url(#small-token-gradient)" filter="url(#small-glow)"/>
+    <circle cx="450" cy="200" r="20" fill="#2D3436" fill-opacity="0.3" stroke="#FFFFFF" stroke-width="1"/>
+    <path d="M440 190 L460 190 L460 210 L440 210 Z" fill="#FFFFFF" fill-opacity="0.9"/>
+  </g>
+  
+  <g transform="rotate(150 300 200)">
+    <circle cx="450" cy="200" r="25" fill="url(#small-token-gradient)" filter="url(#small-glow)"/>
+    <circle cx="450" cy="200" r="15" fill="#2D3436" fill-opacity="0.3" stroke="#FFFFFF" stroke-width="1"/>
+    <path d="M442 192 L458 192 L458 208 L442 208 Z" fill="#FFFFFF" fill-opacity="0.9"/>
+  </g>
+  
+  <g transform="rotate(270 300 200)">
+    <circle cx="450" cy="200" r="35" fill="url(#small-token-gradient)" filter="url(#small-glow)"/>
+    <circle cx="450" cy="200" r="25" fill="#2D3436" fill-opacity="0.3" stroke="#FFFFFF" stroke-width="1"/>
+    <path d="M440 190 L460 190 L460 210 L440 210 Z" fill="#FFFFFF" fill-opacity="0.9"/>
+  </g>
+  
+  <!-- Connection Lines -->
+  <path d="M300 200 L450 200" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="5 5" transform="rotate(30 300 200)"/>
+  <path d="M300 200 L450 200" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="5 5" transform="rotate(150 300 200)"/>
+  <path d="M300 200 L450 200" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="5 5" transform="rotate(270 300 200)"/>
+  
+  <!-- Code Blocks -->
+  <rect x="50" y="50" width="150" height="80" rx="5" fill="#2D3436" fill-opacity="0.7" stroke="#6C5CE7" stroke-width="1"/>
+  <text x="65" y="75" font-family="monospace" font-size="10" fill="#FFFFFF">initialize_mint(</text>
+  <text x="65" y="90" font-family="monospace" font-size="10" fill="#FFFFFF">  &payer,</text>
+  <text x="65" y="105" font-family="monospace" font-size="10" fill="#FFFFFF">  decimals: 9</text>
+  <text x="65" y="120" font-family="monospace" font-size="10" fill="#FFFFFF">);</text>
+  
+  <rect x="400" y="300" width="150" height="80" rx="5" fill="#2D3436" fill-opacity="0.7" stroke="#6C5CE7" stroke-width="1"/>
+  <text x="415" y="325" font-family="monospace" font-size="10" fill="#FFFFFF">transfer(</text>
+  <text x="415" y="340" font-family="monospace" font-size="10" fill="#FFFFFF">  from: account1,</text>
+  <text x="415" y="355" font-family="monospace" font-size="10" fill="#FFFFFF">  to: account2,</text>
+  <text x="415" y="370" font-family="monospace" font-size="10" fill="#FFFFFF">);</text>
+  
+  <!-- Gradients and Filters -->
+  <defs>
+    <linearGradient id="token-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6C5CE7"/>
+      <stop offset="50%" stop-color="#A29BFE"/>
+      <stop offset="100%" stop-color="#00CEC9"/>
+    </linearGradient>
+    
+    <linearGradient id="small-token-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6C5CE7"/>
+      <stop offset="100%" stop-color="#00CEC9"/>
+    </linearGradient>
+    
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    
+    <filter id="small-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+</svg>

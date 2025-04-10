@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="400" rx="10" fill="#F5F6FA"/>
+  
+  <!-- Step 1: Create a Token Mint -->
+  <g>
+    <rect x="50" y="50" width="200" height="120" rx="10" fill="white" stroke="#E0E0E0" stroke-width="2"/>
+    <circle cx="90" cy="90" r="25" fill="#6C5CE7"/>
+    <text x="90" y="95" font-family="Arial" font-size="16" fill="white" text-anchor="middle">1</text>
+    <text x="150" y="80" font-family="Arial" font-size="14" font-weight="bold" fill="#2D3436">Create a Token Mint</text>
+    <text x="150" y="100" font-family="Arial" font-size="12" fill="#636E72" text-anchor="middle">Initialize a new token with</text>
+    <text x="150" y="115" font-family="Arial" font-size="12" fill="#636E72" text-anchor="middle">configurable decimals</text>
+    
+    <path d="M250 110 L300 150" stroke="#6C5CE7" stroke-width="2" stroke-dasharray="5 5"/>
+  </g>
+  
+  <!-- Step 2: Create Token Accounts -->
+  <g>
+    <rect x="300" y="150" width="200" height="120" rx="10" fill="white" stroke="#E0E0E0" stroke-width="2"/>
+    <circle cx="340" cy="190" r="25" fill="#6C5CE7"/>
+    <text x="340" y="195" font-family="Arial" font-size="16" fill="white" text-anchor="middle">2</text>
+    <text x="400" y="180" font-family="Arial" font-size="14" font-weight="bold" fill="#2D3436">Create Token Accounts</text>
+    <text x="400" y="200" font-family="Arial" font-size="12" fill="#636E72" text-anchor="middle">Create accounts to hold</text>
+    <text x="400" y="215" font-family="Arial" font-size="12" fill="#636E72" text-anchor="middle">tokens for different users</text>
+    
+    <path d="M300 210 L250 250" stroke="#6C5CE7" stroke-width="2" stroke-dasharray="5 5"/>
+  </g>
+  
+  <!-- Step 3: Mint and Transfer Tokens -->
+  <g>
+    <rect x="50" y="250" width="200" height="120" rx="10" fill="white" stroke="#E0E0E0" stroke-width="2"/>
+    <circle cx="90" cy="290" r="25" fill="#6C5CE7"/>
+    <text x="90" y="295" font-family="Arial" font-size="16" fill="white" text-anchor="middle">3</text>
+    <text x="150" y="280" font-family="Arial" font-size="14" font-weight="bold" fill="#2D3436">Mint and Transfer</text>
+    <text x="150" y="300" font-family="Arial" font-size="12" fill="#636E72" text-anchor="middle">Mint new tokens and</text>
+    <text x="150" y="315" font-family="Arial" font-size="12" fill="#636E72" text-anchor="middle">transfer between accounts</text>
+    
+    <path d="M250 310 L300 350" stroke="#6C5CE7" stroke-width="2" stroke-dasharray="5 5"/>
+  </g>
+  
+  <!-- Step 4: Monitor and Manage -->
+  <g>
+    <rect x="300" y="350" width="200" height="120" rx="10" fill="white" stroke="#E0E0E0" stroke-width="2" transform="translate(0, -70)"/>
+    <circle cx="340" cy="350" r="25" fill="#6C5CE7" transform="translate(0, -70)"/>
+    <text x="340" y="355" font-family="Arial" font-size="16" fill="white" text-anchor="middle" transform="translate(0, -70)">4</text>
+    <text x="400" y="340" font-family="Arial" font-size="14" font-weight="bold" fill="#2D3436" transform="translate(0, -70)">Monitor and Manage</text>
+    <text x="400" y="360" font-family="Arial" font-size="12" fill="#636E72" text-anchor="middle" transform="translate(0, -70)">Track token activity and</text>
+    <text x="400" y="375" font-family="Arial" font-size="12" fill="#636E72" text-anchor="middle" transform="translate(0, -70)">manage your ecosystem</text>
+  </g>
+  
+  <!-- Token Icons -->
+  <g>
+    <!-- Token 1 -->
+    <circle cx="500" cy="80" r="30" fill="url(#token-gradient-1)"/>
+    <circle cx="500" cy="80" r="20" fill="white" fill-opacity="0.3"/>
+    <text x="500" y="85" font-family="Arial" font-size="14" fill="white" text-anchor="middle">₵</text>
+    
+    <!-- Token 2 -->
+    <circle cx="550" cy="150" r="25" fill="url(#token-gradient-2)"/>
+    <circle cx="550" cy="150" r="15" fill="white" fill-opacity="0.3"/>
+    <text x="550" y="155" font-family="Arial" font-size="12" fill="white" text-anchor="middle">₵</text>
+    
+    <!-- Token 3 -->
+    <circle cx="520" cy="220" r="20" fill="url(#token-gradient-3)"/>
+    <circle cx="520" cy="220" r="12" fill="white" fill-opacity="0.3"/>
+    <text x="520" y="224" font-family="Arial" font-size="10" fill="white" text-anchor="middle">₵</text>
+    
+    <!-- Token 4 -->
+    <circle cx="560" cy="280" r="22" fill="url(#token-gradient-1)"/>
+    <circle cx="560" cy="280" r="14" fill="white" fill-opacity="0.3"/>
+    <text x="560" y="284" font-family="Arial" font-size="11" fill="white" text-anchor="middle">₵</text>
+    
+    <!-- Token 5 -->
+    <circle cx="510" cy="330" r="28" fill="url(#token-gradient-2)"/>
+    <circle cx="510" cy="330" r="18" fill="white" fill-opacity="0.3"/>
+    <text x="510" y="335" font-family="Arial" font-size="13" fill="white" text-anchor="middle">₵</text>
+  </g>
+  
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="token-gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6C5CE7"/>
+      <stop offset="100%" stop-color="#A29BFE"/>
+    </linearGradient>
+    
+    <linearGradient id="token-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00CEC9"/>
+      <stop offset="100%" stop-color="#81ECEC"/>
+    </linearGradient>
+    
+    <linearGradient id="token-gradient-3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FD79A8"/>
+      <stop offset="100%" stop-color="#FDA7DF"/>
+    </linearGradient>
+  </defs>
+</svg>
