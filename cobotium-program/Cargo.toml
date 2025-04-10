@@ -1,0 +1,30 @@
+[package]
+name = "cobotium-program"
+version = "0.1.0"
+edition = "2021"
+description = "Cobotium Token Program"
+
+[features]
+no-entrypoint = []
+
+[dependencies]
+# Solana program library
+solana-program = "1.17.11"
+thiserror = "1.0"
+borsh = "0.10.3"
+borsh-derive = "0.10.3"
+num-derive = "0.4"
+num-traits = "0.2"
+
+[lib]
+# Required for Solana programs
+crate-type = ["cdylib", "lib"]
+
+[profile.release]
+# Recommended settings for Solana programs
+lto = "fat"
+opt-level = "z"
+codegen-units = 1
+debug = false
+overflow-checks = true
+panic = "abort"
